@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Reports{% endblock %}</h1>
+  {% if g.user %}
+    <a class="action" href="{{ url_for('report.create') }}">New</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% for report in reports %}
+    <article class="report">
+      <header>
+        <div>
+          <h1>{{ report['title'] }}</h1>
+          <div class="about">by {{ report['email'] }} on {{ report['created_at'].strftime('%Y-%m-%d') }}</div>
+        </div>
+        {% if g.user['id'] == report['requester_id'] %}
+          <a class="action" href="{{ url_for('report.update', id=report['id']) }}">Edit</a>
+        {% endif %}
+      </header>
+      <p class="sqlcommand">{{ report['sqlcommand'] }}</p>
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
