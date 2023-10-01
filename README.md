@@ -2,6 +2,15 @@
 An easy way to turn an SQL into a spreadsheet
 
 
+Database initiazation:
+    - flask --app sql2spreadsheet init-db
+
+
+Running application:
+    - flask --app sql2spreadsheet run --debug
+
+
+
 Running the Tests:
     - Execute all tests
         - pytest
